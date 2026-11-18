@@ -507,7 +507,7 @@ public class PMD {
             TimeTracker.startGlobalTracking();
         }
 
-        final Level logLevel = configuration.isDebug() ? Level.FINER : Level.INFO;
+        final Level logLevel = Level.OFF;
         final ScopedLogHandlersManager logHandlerManager = new ScopedLogHandlersManager(logLevel, new ConsoleHandler());
         final Level oldLogLevel = LOG.getLevel();
         // Need to do this, since the static logger has already been initialized

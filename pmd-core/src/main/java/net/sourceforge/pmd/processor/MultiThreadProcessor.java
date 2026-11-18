@@ -45,10 +45,20 @@ public class MultiThreadProcessor extends AbstractPMDProcessor {
     @Override
     protected void collectReports(List<Renderer> renderers) {
         try {
+            int fivePercent = (int) (submittedTasks / 20);
             for (int i = 0; i < submittedTasks; i++) {
                 final Report report = completionService.take().get();
+                if (fivePercent > 1) {
+                    if (i % fivePercent == 0) {
+                        int percentage = 5 * (i / fivePercent);
+                        System.out.print("Checked: " + percentage + "%\r");
+                    }
+                } else {
+                    System.out.print("Checked: " + (i + 1) + " files\r");
+                }
                 super.renderReports(renderers, report);
             }
+            System.out.println("PMD checked " + submittedTasks + " files.");
         } catch (final InterruptedException ie) {
             Thread.currentThread().interrupt();
         } catch (final ExecutionException ee) {

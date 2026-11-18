@@ -105,8 +105,6 @@ public abstract class AbstractRenderer extends AbstractPropertySource implements
             this.writer.flush();
         } catch (IOException e) {
             throw new IllegalStateException(e);
-        } finally {
-            IOUtil.closeQuietly(writer);
         }
     }
 
